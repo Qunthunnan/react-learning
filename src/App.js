@@ -1,5 +1,6 @@
-import logo from './logo.svg';
+ import logo from './logo.svg';
 import './App.css';
+import { Component } from 'react';
 
 function App() {
   return (
@@ -22,4 +23,19 @@ function App() {
   );
 }
 
-export default App;
+function FooButton() {
+  let num = 0;
+  const btn = <button className='Button'>Натисків: {num}</button>;
+  return btn;
+}
+//Компоненти можуть бути як класовими 
+
+class Button extends Component {
+  render () {
+    let num = 0;
+    const btn = <button className='Button'>Натисків: {num}</button>;
+    return btn;
+  }
+}
+
+export {App, Button};
