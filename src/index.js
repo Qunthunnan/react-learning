@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {App, Button} from './App';
+import {App} from './App';
 // import reportWebVitals from './reportWebVitals'; 
 
 // const descr = 'list descr';
@@ -24,7 +24,7 @@ import {App, Button} from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Button></Button>
+    <App></App>
   </React.StrictMode>
 );
 
