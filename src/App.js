@@ -3,6 +3,7 @@ import './App.css';
 import { Component } from 'react';
 import { ContentWrapper } from './components/contentWrapper/ContentWrapper';
 import { Input, Message, renderMessage } from './components/inputMessage/inputMessage';
+import { Slider } from './components/slider/Slider';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <p>FLSJSFLSJF</p>
         </ContentWrapper>
         <Input render={renderMessage}></Input>
+        <Slider></Slider>
     </div>
   );
 }
