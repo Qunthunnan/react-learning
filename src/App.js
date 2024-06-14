@@ -4,13 +4,13 @@ import { Component } from 'react';
 import { ContentWrapper } from './components/contentWrapper/ContentWrapper';
 import { Input, Message, renderMessage } from './components/inputMessage/inputMessage';
 import { Slider } from './components/slider/Slider';
+import ListItems from './components/listItems/ListItems';
 
 
 function App() {
   return (
     <div className="App">
-
-        <ContentWrapper style={{ border: '1px solid black' }}>
+        {/* <ContentWrapper style={{ border: '1px solid black' }}>
           <h2>sfsfihwiwhf</h2>
           <p>FLSJSFLSJF</p>
           <p>FLSJSFLSJF</p>
@@ -18,7 +18,8 @@ function App() {
           <p>FLSJSFLSJF</p>
         </ContentWrapper>
         <Input render={renderMessage}></Input>
-        <Slider></Slider>
+        <Slider></Slider> */}
+        <ListItems/>
     </div>
   );
 }
