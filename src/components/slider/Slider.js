@@ -1,5 +1,4 @@
-import userEvent from '@testing-library/user-event';
-import {Component, useCallback, useEffect, useMemo, useState} from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useState} from 'react';
 import {Container} from 'react-bootstrap';
 // class Slider extends Component {
 
@@ -49,36 +48,52 @@ import {Container} from 'react-bootstrap';
 
 export const Slider = (props) => {
     const [slide, setSlide] = useState(0);
-    const [autoplay, setAutoplay] = useState(false);
-    const [active, seActive] = useState(0);
+    const [autoplay, dispatch] = useReducer(reducer, {autoplay: false});
 
-    useEffect(()=>{
-        console.log('starts always')
-    });
-
-    useEffect(()=>{
-        console.log('mounting');
-        fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json').then(result => result.json()).then(data => { result = data; console.log(data) }).catch(error => console.error(error));
-        return () => {
-            console.log('unmounting')
+    function reducer(state, action) {
+        switch(action.type) {
+            case 'toggle':
+                return { autoplay: !state.autoplay }
+            case 'slow':
+                return { autoplay: 'slow' }
+            case 'medium':
+                return { autoplay: 'medium'}
+            case 'off':
+                return { autoplay: false}
+            case 'custom':
+                return { autoplay: action.payload }
+            default:
+                throw new Error('Wrong action type on Slider');
         }
-    },[]);
+    }
 
-    useEffect(()=>{
-        console.log('starts only on changing slide state')
-    }, [slide]);
+    // useEffect(()=>{
+    //     console.log('starts always')
+    // });
 
-    useEffect(()=>{
-        console.log('starts only on changing autoplay state');
-    }, [autoplay]);
+    // useEffect(()=>{
+    //     console.log('mounting');
+    //     fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json').then(result => result.json()).then(data => { result = data; console.log(data) }).catch(error => console.error(error));
+    //     return () => {
+    //         console.log('unmounting')
+    //     }
+    // },[]);
+
+    // useEffect(()=>{
+    //     console.log('starts only on changing slide state')
+    // }, [slide]);
+
+    // useEffect(()=>{
+    //     console.log('starts only on changing autoplay state');
+    // }, [autoplay]);
 
     const changeSlide = useCallback((i) => {
         setSlide(slide => slide + i);
     }, []); 
 
-    const toggleAutoplay = useCallback(() => {
-        setAutoplay(autoplay => !autoplay)
-    }, []);
+    // const toggleAutoplay = useCallback(() => {
+    //     setAutoplay(autoplay => !autoplay)
+    // }, []);
 
     const result = useMemo((slide) => ('Supper storng calculation'), [slide]);
 
@@ -86,17 +101,37 @@ export const Slider = (props) => {
         <Container>
             <div className="slider w-50 m-auto">
                 <img className="d-block w-100" src="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg" alt="slide" />
-                <div className="text-center mt-5">Active slide {slide} <br/> {autoplay ? 'auto' : null}</div>
+                <div className="text-center mt-5">Active slide {slide} <br/> 
+                <p>{ typeof(autoplay.autoplay) === 'boolean' ? autoplay.autoplay.toString() : autoplay.autoplay }</p>
+                </div>
                 <div className="buttons mt-3">
                     <button 
                         className="btn btn-primary me-2"
-                        onClick={() => changeSlide(-1)}>-1</button>
+                        onClick={() => changeSlide(-1)}>-1
+                    </button>
                     <button 
                         className="btn btn-primary me-2"
-                        onClick={() => changeSlide(1)}>+1</button>
+                        onClick={() => changeSlide(1)}>+1
+                    </button>
                     <button 
                         className="btn btn-primary me-2"
-                        onClick={toggleAutoplay}>toggle autoplay</button>
+                        onClick={()=>{dispatch({type: 'toggle'})}}>toggle autoplay
+                    </button>
+                    <button 
+                        className="btn btn-primary me-2"
+                        onClick={()=>{dispatch({type: 'off'})}}>off autoplay
+                    </button> 
+                    <button 
+                        className="btn btn-primary me-2"
+                        onClick={()=>{dispatch({type: 'medium'})}}>medium autoplay
+                    </button>
+                    <button 
+                        className="btn btn-primary me-2"
+                        onClick={()=>{dispatch({type: 'slow'})}}>slow autoplay
+                    </button>
+                    <input 
+                    placeholder='Input slider speed'
+                    onChange={(e)=>{dispatch({type: 'custom', payload: e.target.value})}}/>
                 </div>
             </div>
         </Container>

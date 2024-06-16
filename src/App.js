@@ -1,37 +1,15 @@
  import logo from './logo.svg';
 import './App.css';
 import { Component, useState } from 'react';
-import { ContentWrapper } from './components/contentWrapper/ContentWrapper';
-import { Input, Message, renderMessage } from './components/inputMessage/inputMessage';
-import { Slider } from './components/slider/Slider';
-import ListItems from './components/listItems/ListItems';
-import { createContext } from 'react';
-import { Context } from './components/contex/Context';
+import { Hello, withLog } from './components/hoc/hoc';
+import { TransitionPage } from './components/transition/TransitionPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const data = createContext();
-
-export const {Consumer, Provider} = data;
 
 function App() {
-  const [data, setData] = useState({
-    valueA: 'value1',
-    valueB: 'value2'
-  });
   return (
     <div className="App">
-      <Provider value={data.valueB}>
-        {/* <ContentWrapper style={{ border: '1px solid black' }}>
-          <h2>sfsfihwiwhf</h2>
-          <p>FLSJSFLSJF</p>
-          <p>FLSJSFLSJF</p>
-          <p>FLSJSFLSJF</p>
-          <p>FLSJSFLSJF</p>
-        </ContentWrapper>
-        <Input render={renderMessage}></Input>
-        <Slider></Slider> */}
-        {/* <ListItems/> */}
-        <Context></Context>
-      </Provider>
+      <TransitionPage/>
     </div>
   );
 }

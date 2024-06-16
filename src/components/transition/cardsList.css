@@ -1,0 +1,42 @@
+ul {
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template: auto auto auto / auto auto auto;
+    grid-auto-rows: auto auto auto;
+    row-gap: 30px;
+    justify-items: center;
+    transition: all 300ms;
+}
+
+.item {
+    opacity: 1;
+}
+.item-enter {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+.item-enter-active {
+    opacity: 1;
+    transition: all 300ms;
+    transform: translateY(0);
+
+}
+.item-enter-done {
+    opacity: 1;
+    transform: translateY(0);
+}
+.item-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+.item-exit-active {
+    opacity: 0;
+    transition: all 300ms;
+    transform: translateY(-100%);
+}
+.item-exit-done {
+    display: none;
+    opacity: 0;
+    transform: translateY(-100%);
+}
