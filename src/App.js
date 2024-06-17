@@ -3,13 +3,14 @@ import './App.css';
 import { Component, useState } from 'react';
 import { Hello, withLog } from './components/hoc/hoc';
 import { TransitionPage } from './components/transition/TransitionPage';
+import { DonationForm } from './components/form/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
   return (
     <div className="App">
-      <TransitionPage/>
+      <DonationForm/>
     </div>
   );
 }
